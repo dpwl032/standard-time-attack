@@ -12,7 +12,10 @@ function SearchPage() {
   // URL의 쿼리 스트링을 변경하는 함수
   const updateSearch = (userId) => {};
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const data = postsAxios.get("https://localhost:3001/posts");
+    setPosts(data);
+  }, [posts]);
 
   const filteredPosts = null;
 
