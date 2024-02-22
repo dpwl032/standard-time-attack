@@ -33,7 +33,7 @@ export default function RouterPage() {
         </Route>
 
         {/* 404 Not Found */}
-        <Route element={<NotFount />} />
+        <Route path="*" element={<NotFount />} />
       </Routes>
     </Router>
   );

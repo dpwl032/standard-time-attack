@@ -20,14 +20,11 @@ const SignupPage = () => {
           e.preventDefault();
 
           try {
-            const response = await axios.post(
-              "https://moneyfulpublicpolicy.co.kr/register",
-              {
-                id,
-                password,
-                nickname,
-              }
-            );
+            await authApi.post("/register", {
+              id,
+              password,
+              nickname,
+            });
 
             alert("회원가입에 성공하였습니다. 로그인 페이지로 이동할게요");
             navigate("/login");

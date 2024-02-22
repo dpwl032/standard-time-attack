@@ -7,17 +7,25 @@ function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [posts, setPosts] = useState([]);
 
-  const userId = null;
+  const userId = searchParams.get("userId");
 
   // URL의 쿼리 스트링을 변경하는 함수
-  const updateSearch = (userId) => {};
+  const updateSearch = (userId) => {
+    setSearchParams({ userId: userId });
+  };
 
   useEffect(() => {
-    const data = postsAxios.get("https://localhost:3001/posts");
-    setPosts(data);
-  }, [posts]);
+    const getPostsByUserId = async () => {
+      const response = await postsAxios.get();
+      setPosts(response.data);
+    };
 
-  const filteredPosts = null;
+    getPostsByUserId();
+  }, []);
+
+  const filteredPosts = posts.filter(
+    (post) => post.writerUserId === Number(userId)
+  );
 
   return (
     <div>
@@ -28,6 +36,7 @@ function SearchPage() {
         ) : (
           <p>아래 두 버튼 중 하나를 선택해주세요.</p>
         )}
+        {/* Current search: category={userId} */}
       </div>
 
       <button onClick={() => updateSearch("1")}>1번유저의 글 보기</button>

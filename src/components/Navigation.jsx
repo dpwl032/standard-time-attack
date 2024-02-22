@@ -17,14 +17,17 @@ const Navigation = () => {
   return (
     <nav>
       {/* 로그인 또는 로그아웃 버튼 */}
-      <button onClick={signOut}>로그아웃</button>
-      <button
-        onClick={() => {
-          navigate("/login");
-        }}
-      >
-        로그인하러가기
-      </button>
+      {localStorage.getItem("accessToken") ? (
+        <button onClick={signOut}>로그아웃</button>
+      ) : (
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          로그인하러가기
+        </button>
+      )}
 
       <ul
         style={{

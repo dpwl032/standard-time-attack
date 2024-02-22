@@ -1,14 +1,15 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import Navigation from "../Navigation";
-import { useNavigate } from "react-router-dom";
 
 const NonAuthLayout = () => {
-  const navigate = useNavigate();
+  //정답코드
+  //const token  = localStorage.getItem("accessToken") ? true : false;
+
+  //내코드
   const token = localStorage.getItem("accessToken");
   if (token) {
-    navigate("/");
-    // alert("이미 로그인 상태입니다");
+    return <Navigate to="/" replace />;
   }
   return (
     <div>

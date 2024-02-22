@@ -1,13 +1,16 @@
 import React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import Navigation from "../Navigation";
 
 const AuthLayout = () => {
-  const navigate = useNavigate();
+  //정답코드
+  //const token = localStorage.getItem("accessToken") ? true : false;
+
+  //내코드
   const token = localStorage.getItem("accessToken");
   if (!token) {
     alert("로그인 먼저 해주세요!");
-    // navigate("/login");
+    return <Navigate to="/login" replace />;
   }
 
   return (

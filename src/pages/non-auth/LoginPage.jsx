@@ -19,17 +19,20 @@ const LoginPage = () => {
           e.preventDefault();
 
           try {
-            const response = await axios.post(
-              "https://moneyfulpublicpolicy.co.kr/login?expiresIn=10m",
-              {
-                id,
-                password,
-              }
-            );
-
+            // (1) 로그인 시도
+            const response = await authApi.post("/login?expiresIn=10m", {
+              id,
+              password,
+            });
+            // (2) localStorage에 토큰 저장
+            if (!response.data.accessToken) {
+              alert("토큰이 없습니다. 고객센터에 문의해주세요.");
+              return;
+            }
             localStorage.setItem("accessToken", response.data.accessToken);
             localStorage.setItem("userId", response.data.userId);
             localStorage.setItem("nickname", response.data.nickname);
+            // (3) 로그인 성공 시, 안내 메시지
             alert("로그인에 성공하였습니다. 메인 페이지로 이동할게요");
             navigate("/");
           } catch (error) {
